@@ -1,4 +1,4 @@
-package com.example.testusersapp.presentation.ui.user
+package com.example.testusersapp.presentation.ui.fragments
 
 import android.content.Context
 import android.os.Bundle

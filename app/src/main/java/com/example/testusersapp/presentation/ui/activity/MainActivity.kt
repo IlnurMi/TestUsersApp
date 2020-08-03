@@ -1,32 +1,37 @@
-package com.example.testusersapp.presentation.ui.main
+package com.example.testusersapp.presentation.ui.activity
 
 import android.annotation.SuppressLint
+import android.content.Context
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.AttributeSet
 import android.util.Log
+import android.view.View
+import androidx.fragment.app.Fragment
 import com.example.testusersapp.App
 import com.example.testusersapp.R
 import com.example.testusersapp.data.model.User
 import com.example.testusersapp.data.model.UserEntity
 import com.example.testusersapp.data.repository.AppRepository
+import com.example.testusersapp.presentation.ui.fragments.ListFragment
 
 class MainActivity : AppCompatActivity() {
-
-    private var repository: AppRepository? = null
 
     @SuppressLint("CheckResult")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        repository = (applicationContext as App).repositoryComponent?.repository
-        repository?.getAllUsers()?.subscribe({result -> success(result)}, {error -> error(error)})
+        addFragments()
     }
 
-    fun success(result: List<User>){
-        Log.d("TAG", "success: ${result.get(0)}")
+    override fun onStart() {
+        super.onStart()
     }
 
-    fun error(error: Throwable){
-        Log.d("TAG", "error: $error")
+    private fun addFragments(){
+        supportFragmentManager
+            .beginTransaction()
+            .add(R.id.fragment, ListFragment() as Fragment)
+            .commit()
     }
 }

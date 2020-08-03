@@ -16,7 +16,6 @@ class AppRepository(private val apiService: ApiService, private val database: Ap
     AppRepositoryInterface {
 
     override fun getAllUsers(): Single<List<User>> {
-        Log.d("TAG", "getAllUsers")
         return apiService.getUsers(PreferenceRepository.getInstance().getToken())
             .flatMap {
                 recordDatabase(it)
