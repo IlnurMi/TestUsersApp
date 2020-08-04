@@ -67,6 +67,7 @@ dependencies {
 
     // Room
     implementation "androidx.room:room-runtime:$room_version"
+    implementation "androidx.room:room-rxjava2:$room_version"
     kapt "androidx.room:room-compiler:$room_version"
 
     // Dagger
@@ -75,7 +76,7 @@ dependencies {
 
     // ViewModel and LiveData
     implementation "android.arch.lifecycle:extensions:$view_model_and_live_data_version"
-    kapt "android.arch.lifecycle:common-java8:$view_model_and_live_data_version"
+    kapt "android.arch.lifecycle:compiler:$view_model_and_live_data_version"
 
     // SwipeRefreshLayout
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:$swipe_refresh_layout_version"

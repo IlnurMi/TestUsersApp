@@ -14,6 +14,7 @@ import com.example.testusersapp.data.model.User
 import com.example.testusersapp.data.model.UserEntity
 import com.example.testusersapp.data.repository.AppRepository
 import com.example.testusersapp.presentation.ui.fragments.ListFragment
+import com.example.testusersapp.presentation.ui.fragments.UserFragment
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,6 +33,13 @@ class MainActivity : AppCompatActivity() {
         supportFragmentManager
             .beginTransaction()
             .add(R.id.fragment, ListFragment() as Fragment)
+            .commit()
+    }
+
+    fun replaceFragments(){
+        supportFragmentManager
+            .beginTransaction()
+            .replace(R.id.fragment, UserFragment() as Fragment)
             .commit()
     }
 }

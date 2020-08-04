@@ -1,4 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="margin_layout">8dp</dimen>
+    <dimen name="nameTextSize">18dp</dimen>
+    <dimen name="emailTextSize">12dp</dimen>
 </resources>

@@ -2,7 +2,6 @@ package com.example.testusersapp
 
 import android.app.Application
 import androidx.room.Room
-import androidx.room.RoomDatabase
 import com.example.testusersapp.data.database.AppRoomDatabase
 import com.example.testusersapp.data.preference.PreferenceRepository
 import com.example.testusersapp.di.component.DaggerApiComponent

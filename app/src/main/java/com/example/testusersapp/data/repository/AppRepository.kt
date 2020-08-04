@@ -1,6 +1,5 @@
 package com.example.testusersapp.data.repository
 
-import android.util.Log
 import com.example.testusersapp.data.database.AppRoomDatabase
 import com.example.testusersapp.data.interfaces.AppRepositoryInterface
 import com.example.testusersapp.data.model.User
@@ -24,6 +23,25 @@ class AppRepository(private val apiService: ApiService, private val database: Ap
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
     }
+
+    override fun getAllUsersWithDatabase(): Single<List<User>> {
+        return database.userDao()
+            .getUsersSingle()
+            .flatMap { it ->
+                if (it.isEmpty()) {
+                    return@flatMap apiService.getUsers(
+                                PreferenceRepository.getInstance().getToken())
+                                .flatMap {
+                                    recordDatabase(it)
+                                    Single.just(database.userDao().getUsers())
+                                }
+                }
+                return@flatMap database.userDao().getUsersSingle()
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+    }
+
 
     override fun getUserById(id: Int) {
         //TODO("Not yet implemented")
