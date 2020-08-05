@@ -6,5 +6,6 @@ import io.reactivex.Single
 interface AppRepositoryInterface {
     fun getAllUsers(): Single<List<User>>
     fun getAllUsersWithDatabase(): Single<List<User>>
-    fun getUserById(id: Int)
+    fun getUserById(id: Int): Single<User>
+    fun getUserFriends(list: List<String>): Single<List<User>>
 }

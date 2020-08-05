@@ -25,10 +25,6 @@ class MainActivity : AppCompatActivity() {
         addFragments()
     }
 
-    override fun onStart() {
-        super.onStart()
-    }
-
     private fun addFragments(){
         supportFragmentManager
             .beginTransaction()
@@ -36,10 +32,14 @@ class MainActivity : AppCompatActivity() {
             .commit()
     }
 
-    fun replaceFragments(){
+    fun replaceFragments(id: Int){
+        val arguments = Bundle()
+        arguments.putInt("id", id)
+        val userFragment = UserFragment()
+        userFragment.arguments = arguments
         supportFragmentManager
             .beginTransaction()
-            .replace(R.id.fragment, UserFragment() as Fragment)
+            .replace(R.id.fragment, userFragment as Fragment)
             .commit()
     }
 }

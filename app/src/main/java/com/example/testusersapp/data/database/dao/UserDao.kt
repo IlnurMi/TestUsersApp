@@ -13,7 +13,10 @@ interface UserDao: BaseDao<User> {
     fun getUsersSingle(): Single<List<User>>
 
     @Query("SELECT * FROM users WHERE id = :id")
-    fun getUser(id: Int): User
+    fun getUser(id: Int): Single<User>
+
+    @Query("SELECT * FROM users WHERE id IN (:listId)")
+    fun getUserFriends(listId: List<Int>): Single<List<User>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertList(list: List<User>)

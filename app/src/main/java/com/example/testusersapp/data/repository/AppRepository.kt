@@ -8,6 +8,7 @@ import com.example.testusersapp.data.network.api.ApiService
 import com.example.testusersapp.data.preference.PreferenceRepository
 import io.reactivex.Single
 import io.reactivex.android.schedulers.AndroidSchedulers
+import io.reactivex.android.schedulers.AndroidSchedulers.*
 import io.reactivex.schedulers.Schedulers
 import java.util.ArrayList
 
@@ -21,7 +22,7 @@ class AppRepository(private val apiService: ApiService, private val database: Ap
                 Single.just(database.userDao().getUsers())
             }
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(mainThread())
     }
 
     override fun getAllUsersWithDatabase(): Single<List<User>> {
@@ -39,12 +40,31 @@ class AppRepository(private val apiService: ApiService, private val database: Ap
                 return@flatMap database.userDao().getUsersSingle()
             }
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
+            .observeOn(mainThread())
     }
 
 
-    override fun getUserById(id: Int) {
-        //TODO("Not yet implemented")
+    override fun getUserById(id: Int): Single<User> {
+       return database
+           .userDao()
+           .getUser(id)
+           .subscribeOn(Schedulers.io())
+           .observeOn(mainThread())
+    }
+
+    override fun getUserFriends(list: List<String>): Single<List<User>> {
+        return database
+            .userDao()
+            .getUserFriends(convertList(list))
+            .subscribeOn(Schedulers.io())
+            .observeOn(mainThread())
+    }
+
+    private fun convertList(list: List<String>): List<Int>{
+        val result = arrayListOf<Int>()
+        for (item in list)
+            result.add(item.toInt())
+        return result
     }
 
     private fun recordDatabase(users: List<UserEntity>) {

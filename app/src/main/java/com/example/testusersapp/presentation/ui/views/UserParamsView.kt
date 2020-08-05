@@ -42,4 +42,8 @@ class UserParamsView @JvmOverloads constructor(
         else
             tv_user_params.text = param
     }
+
+    fun getString(): String{
+        return tv_user_params.text.toString()
+    }
 }

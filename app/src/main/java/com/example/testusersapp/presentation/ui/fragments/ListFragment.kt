@@ -6,13 +6,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testusersapp.App
 import com.example.testusersapp.R
 import com.example.testusersapp.data.model.User
 import com.example.testusersapp.data.repository.AppRepository
 import com.example.testusersapp.domain.AllUsersViewModel
+import com.example.testusersapp.domain.ViewModelFactory
 import com.example.testusersapp.presentation.adapters.UsersAdapter
 import com.example.testusersapp.presentation.listeners.UserAdapterListener
 import com.example.testusersapp.presentation.ui.activity.MainActivity
@@ -24,6 +27,7 @@ class ListFragment: Fragment(), UserAdapterListener {
     private lateinit var usersAdapter: UsersAdapter
     private var repository: AppRepository? = null
     private var usersList: List<User>? = null
+    private lateinit var allUsersViewModel: AllUsersViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -36,6 +40,11 @@ class ListFragment: Fragment(), UserAdapterListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         init()
+        allUsersViewModel = ViewModelProviders.of(this, ViewModelFactory((requireActivity().application as App).repositoryComponent!!.repository)).get(AllUsersViewModel::class.java)
+        allUsersViewModel.getLiveDataUsers()?.observe(this,
+            Observer<List<User>> {
+                success(it)
+            })
     }
 
     private fun init(){
@@ -44,8 +53,8 @@ class ListFragment: Fragment(), UserAdapterListener {
         rv_users.layoutManager = LinearLayoutManager(requireContext())
         rv_users.adapter = usersAdapter
 
-        repository = (activity?.applicationContext as App).repositoryComponent?.repository
-        repository?.getAllUsersWithDatabase()?.subscribe({result -> success(result)}, {error -> error(error)})
+//        repository = (activity?.applicationContext as App).repositoryComponent?.repository
+//        repository?.getAllUsersWithDatabase()?.subscribe({result -> success(result)}, {error -> error(error)})
     }
 
     private fun success(result: List<User>){
@@ -58,8 +67,6 @@ class ListFragment: Fragment(), UserAdapterListener {
     }
 
     override fun selectUser(id: Int) {
-        (context as MainActivity).replaceFragments()
-        //Toast.makeText(activity, "selected user", Toast.LENGTH_SHORT).show()
-        //TODO("Not yet implemented")
+        (context as MainActivity).replaceFragments(id)
     }
 }
