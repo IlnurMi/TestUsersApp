@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testusersapp.App
@@ -39,6 +38,10 @@ class ListFragment: Fragment(), UserAdapterListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        (context as MainActivity).supportActionBar?.title = activity?.getString(R.string.app_name)
+        (context as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
+
         init()
         allUsersViewModel = ViewModelProviders.of(this, ViewModelFactory((requireActivity().application as App).repositoryComponent!!.repository)).get(AllUsersViewModel::class.java)
         allUsersViewModel.getLiveDataUsers()?.observe(this,

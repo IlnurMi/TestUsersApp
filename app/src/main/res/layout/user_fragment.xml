@@ -29,6 +29,7 @@
                 android:id="@+id/tv_user_age"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_custom_view_top"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_name"
                 app:title="@string/age" />
@@ -37,6 +38,7 @@
                 android:id="@+id/tv_user_company"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_custom_view_top"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_age"
                 app:title="@string/company" />
@@ -45,6 +47,7 @@
                 android:id="@+id/tv_user_email"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_custom_view_top"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_company"
                 app:title="@string/email" />
@@ -53,6 +56,7 @@
                 android:id="@+id/tv_user_phone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_custom_view_top"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_email"
                 app:title="@string/phone" />
@@ -61,6 +65,7 @@
                 android:id="@+id/tv_user_address"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_custom_view_top"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_phone"
                 app:title="@string/address" />
@@ -69,6 +74,7 @@
                 android:id="@+id/tv_user_about"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_custom_view_top"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_address"
                 app:title="@string/about" />
@@ -77,6 +83,7 @@
                 android:id="@+id/tv_user_registered"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_custom_view_top"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_about"
                 app:title="@string/registered" />
@@ -85,25 +92,30 @@
                 android:id="@+id/tv_user_coordinate"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_custom_view_top"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_registered"
                 app:title="@string/coordinate" />
 
             <com.example.testusersapp.presentation.ui.views.UserImageView
-                android:id="@+id/tv_user_eye_color"
-                android:layout_width="match_parent"
+                android:id="@+id/tv_user_favorite_fruit"
+                android:layout_width="0dp"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/margin_custom_view_top"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/tv_user_eye_color"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_coordinate"
-                app:title="@string/eye_color" />
+                app:title="@string/fav_fruit" />
 
             <com.example.testusersapp.presentation.ui.views.UserImageView
-                android:id="@+id/tv_user_favorite_fruit"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/tv_user_eye_color"
-                app:title="@string/fav_fruit" />
+                android:id="@+id/tv_user_eye_color"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_constraintStart_toEndOf="@id/tv_user_favorite_fruit"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="@id/tv_user_favorite_fruit"
+                app:layout_constraintBottom_toBottomOf="@id/tv_user_favorite_fruit"
+                app:title="@string/eye_color" />
 
             <TextView
                 android:id="@+id/tv_friends"
@@ -113,6 +125,7 @@
                 android:textStyle="bold"
                 android:textSize="@dimen/nameTextSize"
                 android:text="@string/user_friends"
+                android:layout_marginTop="@dimen/margin_layout"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_user_favorite_fruit" />
@@ -122,7 +135,9 @@
                 android:id="@+id/rv_friends"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="@dimen/margin_layout"
+                android:layout_marginTop="@dimen/margin_layout_top_rv"
+                android:layout_marginStart="@dimen/margin_layout_top"
+                android:layout_marginEnd="@dimen/margin_layout_top"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/tv_friends" />

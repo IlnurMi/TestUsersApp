@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@drawable/params_ripple">
 
     <TextView
         android:id="@+id/tv_user_params_title"
@@ -13,9 +14,10 @@
         android:textStyle="bold"
         android:textSize="@dimen/nameTextSize"
         tools:text="@string/user_params_title"
+        android:layout_marginTop="@dimen/margin_layout_top"
         android:layout_marginStart="@dimen/margin_layout"
-        android:layout_marginTop="@dimen/margin_layout"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"/>
 
     <TextView
@@ -26,18 +28,8 @@
         android:textSize="@dimen/emailTextSize"
         tools:hint="@string/user_params"
         android:layout_marginStart="@dimen/margin_layout"
-        android:layout_marginTop="@dimen/margin_layout"
+        android:layout_marginTop="@dimen/margin_layout_top"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_user_params_title"/>
-
-    <View
-        android:id="@+id/view_user_params"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginStart="@dimen/margin_layout"
-        android:layout_marginEnd="@dimen/margin_layout"
-        android:layout_marginTop="@dimen/margin_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_user_params"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

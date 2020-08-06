@@ -3,6 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@color/backgroundItem"
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
@@ -26,16 +27,7 @@
         android:layout_marginStart="@dimen/margin_layout"
         android:layout_marginTop="@dimen/margin_layout"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_user_image_title"/>
-
-    <View
-        android:id="@+id/view_user_image"
-        android:layout_width="match_parent"
-        android:layout_height="0.5dp"
-        android:layout_marginStart="@dimen/margin_layout"
-        android:layout_marginEnd="@dimen/margin_layout"
-        android:layout_marginTop="@dimen/margin_layout"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/iv_user_image"/>
+        app:layout_constraintTop_toBottomOf="@id/tv_user_image_title"
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

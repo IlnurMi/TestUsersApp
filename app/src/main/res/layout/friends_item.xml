@@ -3,7 +3,8 @@
     android:id="@+id/item_friends_layout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@color/backgroundItem"
+    android:background="@drawable/ripple"
+    android:elevation="@dimen/elevation"
     android:layout_marginBottom="2dp"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
