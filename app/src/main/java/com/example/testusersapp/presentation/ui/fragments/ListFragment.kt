@@ -11,10 +11,10 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testusersapp.App
 import com.example.testusersapp.R
-import com.example.testusersapp.data.model.User
 import com.example.testusersapp.data.repository.AppRepository
-import com.example.testusersapp.domain.AllUsersViewModel
-import com.example.testusersapp.domain.ViewModelFactory
+import com.example.testusersapp.domain.models.User
+import com.example.testusersapp.presentation.viewmodels.AllUsersViewModel
+import com.example.testusersapp.presentation.viewmodels.ViewModelFactory
 import com.example.testusersapp.presentation.adapters.UsersAdapter
 import com.example.testusersapp.presentation.listeners.UserAdapterListener
 import com.example.testusersapp.presentation.ui.activity.MainActivity
@@ -43,11 +43,14 @@ class ListFragment: Fragment(), UserAdapterListener {
         (context as MainActivity).supportActionBar?.setDisplayHomeAsUpEnabled(false)
 
         init()
-        allUsersViewModel = ViewModelProviders.of(this, ViewModelFactory((requireActivity().application as App).repositoryComponent!!.repository)).get(AllUsersViewModel::class.java)
+/*        allUsersViewModel = ViewModelProviders.of(this,
+            ViewModelFactory((requireActivity().application as App).repositoryComponent!!.repository)
+        ).get(
+            AllUsersViewModel::class.java)
         allUsersViewModel.getLiveDataUsers()?.observe(this,
             Observer<List<User>> {
                 success(it)
-            })
+            })*/
     }
 
     private fun init(){
@@ -55,13 +58,9 @@ class ListFragment: Fragment(), UserAdapterListener {
         usersAdapter = UsersAdapter(usersList as ArrayList<User>, this)
         rv_users.layoutManager = LinearLayoutManager(requireContext())
         rv_users.adapter = usersAdapter
-
-//        repository = (activity?.applicationContext as App).repositoryComponent?.repository
-//        repository?.getAllUsersWithDatabase()?.subscribe({result -> success(result)}, {error -> error(error)})
     }
 
     private fun success(result: List<User>){
-        Log.d("TAG", "success: ${result[0]}")
         usersAdapter.addItems(result)
     }
 

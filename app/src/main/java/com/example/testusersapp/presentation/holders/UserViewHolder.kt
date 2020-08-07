@@ -6,7 +6,7 @@ import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.recyclerview.widget.RecyclerView
 import com.example.testusersapp.R
-import com.example.testusersapp.data.model.User
+import com.example.testusersapp.domain.models.User
 import com.example.testusersapp.presentation.listeners.UserAdapterListener
 
 class UserViewHolder(itemView: View, private var listener: UserAdapterListener): RecyclerView.ViewHolder(itemView) {

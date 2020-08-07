@@ -1,6 +1,5 @@
 package com.example.testusersapp.presentation.ui.fragments
 
-import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
@@ -14,9 +13,9 @@ import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.testusersapp.App
 import com.example.testusersapp.R
-import com.example.testusersapp.data.model.User
-import com.example.testusersapp.domain.AllUsersViewModel
-import com.example.testusersapp.domain.ViewModelFactory
+import com.example.testusersapp.domain.models.User
+import com.example.testusersapp.presentation.viewmodels.AllUsersViewModel
+import com.example.testusersapp.presentation.viewmodels.ViewModelFactory
 import com.example.testusersapp.presentation.adapters.FriendsAdapter
 import com.example.testusersapp.presentation.listeners.UserAdapterListener
 import com.example.testusersapp.presentation.ui.activity.MainActivity
@@ -31,10 +30,6 @@ class UserFragment : Fragment(), UserAdapterListener {
     private lateinit var allUsersViewModel: AllUsersViewModel
     private var usersList: List<User>? = null
     private lateinit var friendsAdapter: FriendsAdapter
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -60,7 +55,7 @@ class UserFragment : Fragment(), UserAdapterListener {
         rv_friends.layoutManager = LinearLayoutManager(requireContext())
         rv_friends.adapter = friendsAdapter
 
-        allUsersViewModel = ViewModelProviders.of(
+/*        allUsersViewModel = ViewModelProviders.of(
             this,
             ViewModelFactory((requireActivity().application as App).repositoryComponent!!.repository)
         ).get(
@@ -76,7 +71,7 @@ class UserFragment : Fragment(), UserAdapterListener {
         allUsersViewModel.getUserFriendsLiveData().observe(this,
             Observer<List<User>> {
                 setAdapters(it)
-            })
+            })*/
 
         setListeners()
     }
@@ -99,22 +94,22 @@ class UserFragment : Fragment(), UserAdapterListener {
         }
     }
 
-    private fun setData(user: User) {
-        tv_user_name.setParam(user.name)
-        tv_user_age.setParam(user.age.toString())
-        tv_user_company.setParam(user.company)
-        tv_user_email.setParam(user.email)
-        tv_user_phone.setParam(user.phone)
-        tv_user_address.setParam(user.address)
-        tv_user_about.setParam(user.about)
-        tv_user_registered.setParam(convertDate(user.registered))
-        tv_user_coordinate.setParam("${user.latitude}, ${user.longitude}")
-        when (user.eyeColor) {
+    private fun setData(userModel: User) {
+        tv_user_name.setParam(userModel.name)
+        tv_user_age.setParam(userModel.age.toString())
+        tv_user_company.setParam(userModel.company)
+        tv_user_email.setParam(userModel.email)
+        tv_user_phone.setParam(userModel.phone)
+        tv_user_address.setParam(userModel.address)
+        tv_user_about.setParam(userModel.about)
+        tv_user_registered.setParam(convertDate(userModel.registered))
+        tv_user_coordinate.setParam("${userModel.latitude}, ${userModel.longitude}")
+        when (userModel.eyeColor) {
             "brown" -> tv_user_eye_color.setParam(R.drawable.ic_brown_eye)
             "green" -> tv_user_eye_color.setParam(R.drawable.ic_green_eye)
             "blue" -> tv_user_eye_color.setParam(R.drawable.ic_blue_eye)
         }
-        when (user.favoriteFruit) {
+        when (userModel.favoriteFruit) {
             "apple" -> tv_user_favorite_fruit.setParam(R.drawable.ic_apple)
             "banana" -> tv_user_favorite_fruit.setParam(R.drawable.ic_banana)
             "strawberry" -> tv_user_favorite_fruit.setParam(R.drawable.ic_strawberry)
