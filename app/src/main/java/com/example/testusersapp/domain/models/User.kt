@@ -1,13 +1,6 @@
-package com.example.testusersapp.data.model
+package com.example.testusersapp.domain.models
 
-import androidx.room.Entity
-import androidx.room.PrimaryKey
-import androidx.room.TypeConverters
-import com.example.testusersapp.data.utils.ListConverter
-
-@Entity(tableName = "users")
 data class User(
-    @PrimaryKey
     val id: Int,
     val guid: String,
     val isActive: Boolean,
@@ -24,9 +17,7 @@ data class User(
     val registered: String,
     val latitude: Double,
     val longitude: Double,
-    @TypeConverters(ListConverter::class)
     val tags: List<String>,
-    @TypeConverters(ListConverter::class)
     val friends: List<String>,
     val favoriteFruit: String
 )
