@@ -1,7 +1,6 @@
 package com.example.testusersapp.data.database.dao
 
 import androidx.room.*
-import com.example.testusersapp.data.utils.ListConverter
 
 @Dao
 interface BaseDao<in T> {

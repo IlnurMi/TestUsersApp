@@ -4,18 +4,14 @@ import android.app.Application
 import androidx.room.Room
 import com.example.testusersapp.data.database.AppRoomDatabase
 import com.example.testusersapp.data.preference.PreferenceRepository
-import com.example.testusersapp.di.component.DaggerApiComponent
-import com.example.testusersapp.di.component.DaggerDatabaseComponent
-import com.example.testusersapp.di.component.DaggerRepositoryComponent
-import com.example.testusersapp.di.component.RepositoryComponent
-import com.example.testusersapp.di.module.ApiModule
-import com.example.testusersapp.di.module.DatabaseModule
-import com.example.testusersapp.di.module.RepositoryModule
+import com.example.testusersapp.di.component.AppComponent
+import com.example.testusersapp.di.component.DaggerAppComponent
+import com.example.testusersapp.di.module.*
 
-class App: Application() {
+class App : Application() {
     private var preferenceRepository: PreferenceRepository? = null
     private var database: AppRoomDatabase? = null
-    var repositoryComponent: RepositoryComponent? = null
+    lateinit var appComponent: AppComponent
 
     override fun onCreate() {
         super.onCreate()
@@ -24,32 +20,25 @@ class App: Application() {
         initDagger()
     }
 
-    private fun initPreference(){
+    private fun initPreference() {
         preferenceRepository = PreferenceRepository.getInstance()
         preferenceRepository?.init(applicationContext)
         preferenceRepository?.saveToken(getString(R.string.token))
     }
 
-    private fun initRoom(){
+    private fun initRoom() {
         database = Room
             .databaseBuilder(this, AppRoomDatabase::class.java, "database")
             .allowMainThreadQueries()
             .build()
     }
 
-    private fun initDagger(){
-        val apiComponent = DaggerApiComponent.builder()
+    private fun initDagger() {
+        appComponent = DaggerAppComponent.builder()
             .apiModule(ApiModule())
-            .build()
-
-        val databaseComponent = DaggerDatabaseComponent.builder()
             .databaseModule(DatabaseModule(this.database!!))
-            .build()
-
-        this.repositoryComponent = DaggerRepositoryComponent.builder()
-            .apiComponent(apiComponent)
-            .databaseComponent(databaseComponent)
             .repositoryModule(RepositoryModule())
+            .interactorModule(InteractorModule()).viewModelModule(ViewModelModule())
             .build()
     }
 }
