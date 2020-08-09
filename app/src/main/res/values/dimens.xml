@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="margin_layout">8dp</dimen>
+    <dimen name="margin_layout_top">4dp</dimen>
+    <dimen name="margin_layout_top_rv">2dp</dimen>
+    <dimen name="margin_custom_view_top">1dp</dimen>
+    <dimen name="nameTextSize">18dp</dimen>
+    <dimen name="emailTextSize">14dp</dimen>
+    <dimen name="elevation">4dp</dimen>
+    <dimen name="radius">3dp</dimen>
+    <dimen name="margin_layout_end">12dp</dimen>
+    <dimen name="margin_layout_rv">4dp</dimen>
+</resources>
