@@ -81,6 +81,7 @@ class UserFragment : Fragment(), UserAdapterListener {
     }
 
     private fun setListeners() {
+
         tv_user_email.setOnClickListener {
             sendEmail(tv_user_email.getString())
         }

@@ -26,6 +26,14 @@ class AllUsersViewModel(private val interactor: MainInteractor) : ViewModel() {
         })
     }
 
+    fun updateUsers(){
+        interactor.updateUsers({
+            allUsersLiveData.value = it
+        },{
+            errorLiveData.value = it
+        })
+    }
+
     fun getLiveDataUsers(): LiveData<List<User>>? {
         return allUsersLiveData
     }

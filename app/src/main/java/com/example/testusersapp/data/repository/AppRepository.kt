@@ -9,6 +9,7 @@ import com.example.testusersapp.data.preference.PreferenceRepository
 import com.example.testusersapp.domain.interfaces.repositories.Repository
 import com.example.testusersapp.domain.models.User
 import io.reactivex.Single
+import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.android.schedulers.AndroidSchedulers.*
 import io.reactivex.schedulers.Schedulers
 import java.util.ArrayList
@@ -63,6 +64,21 @@ class AppRepository(private val apiService: ApiService, private val database: Ap
             .subscribe({
                 onSuccess(convertUserList(it))
             }, {
+                onError(it.returnMessage())
+            })
+    }
+
+    override fun updateUsers(onSuccess: (List<User>) -> Unit, onError: (e: String) -> Unit) {
+        val update = apiService
+            .getUsers(PreferenceRepository.getInstance().getToken())
+            .flatMap { recordDatabase(it)
+                Single.just(database.userDao().getUsers())
+            }
+            .subscribeOn(Schedulers.io())
+            .observeOn(mainThread())
+            .subscribe({
+                onSuccess(convertUserList(it))
+            },{
                 onError(it.returnMessage())
             })
     }

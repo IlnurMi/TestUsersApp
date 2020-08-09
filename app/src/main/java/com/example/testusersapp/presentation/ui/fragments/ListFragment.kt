@@ -47,6 +47,7 @@ class ListFragment : Fragment(), UserAdapterListener {
         super.onViewCreated(view, savedInstanceState)
         (requireActivity().application as App).appComponent.injectListFragment(this)
         init()
+        setListeners()
     }
 
     private fun init() {
@@ -61,8 +62,15 @@ class ListFragment : Fragment(), UserAdapterListener {
         allUsersViewModel = ViewModelProviders.of(activity!!, factory).get(AllUsersViewModel::class.java)
         allUsersViewModel.getLiveDataUsers()?.observe(this,
             Observer {
+                swipe_refresh_layout.isRefreshing = false
                 populateAdapter(it)
             })
+    }
+
+    private fun setListeners(){
+        swipe_refresh_layout.setOnRefreshListener {
+            allUsersViewModel.updateUsers()
+        }
     }
 
     private fun populateAdapter(result: List<User>) {

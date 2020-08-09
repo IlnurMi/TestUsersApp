@@ -22,4 +22,8 @@ class MainInteractorImp(private val repository: Repository) : MainInteractor {
         repository.getUserFriends(friendsId, onSuccess, onError)
     }
 
+    override fun updateUsers(onSuccess: (List<User>) -> Unit, onError: (e: String) -> Unit) {
+        repository.updateUsers(onSuccess, onError)
+    }
+
 }
