@@ -1,3 +1,29 @@
 <resources>
     <string name="app_name">TestUsersApp</string>
+    <string name="token">e3672c23-b1a5-4ca7-bb77-b6580d75810c</string>
+    <string name="user_params_title">Params title</string>
+    <string name="user_params">User params</string>
+    <string name="not_data">Not Data</string>
+    <string name="name">Name</string>
+    <string name="about">About</string>
+    <string name="address">Address</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="company">Company</string>
+    <string name="age">Age</string>
+    <string name="registered">Registered</string>
+    <string name="coordinate">Coordinate</string>
+    <string name="eye_color">Eye color</string>
+    <string name="fav_fruit">Favorite fruit</string>
+    <string name="user_friends">Friends</string>
+    <string name="user">User</string>
+
+    <declare-styleable name="UserParamsView">
+        <attr name="title"/>
+        <attr name="subtitle"/>
+    </declare-styleable>
+
+    <declare-styleable name="UserImageView">
+        <attr name="title"/>
+    </declare-styleable>
 </resources>
