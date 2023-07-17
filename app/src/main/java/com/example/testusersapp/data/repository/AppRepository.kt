@@ -83,6 +83,21 @@ class AppRepository(private val apiService: ApiService, private val database: Ap
             })
     }
 
+    override fun saveAndCheckPinCode(
+        code: String,
+        onSuccess: (success: Boolean) -> Unit,
+        onError: (e: String) -> Unit
+    ) {
+        val pref = PreferenceRepository.getInstance()
+        if (pref.getPinCode().isNullOrEmpty()) {
+            pref.savePinCode(code)
+            onSuccess.invoke(true)
+        } else if (pref.getPinCode() == code) {
+            onSuccess.invoke(true)
+        } else
+            onError.invoke("Неверный пин-код")
+    }
+
     private fun getAllUser(): Single<List<UserEntity>> {
         return apiService.getUsers(PreferenceRepository.getInstance().getToken())
             .flatMap {

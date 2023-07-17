@@ -7,7 +7,6 @@ import com.example.testusersapp.data.utils.ConstantUtils
 class PreferenceRepository private constructor() {
     private lateinit var preference: SharedPreferences
 
-    // singleton
     companion object {
         private var INSTANCE: PreferenceRepository? = null
         fun getInstance(): PreferenceRepository{
@@ -29,4 +28,12 @@ class PreferenceRepository private constructor() {
     }
 
     fun getToken(): String = preference.getString(ConstantUtils.TOKEN, "")
+
+    fun savePinCode(pinCode: String) {
+        val editor = preference.edit()
+        editor.putString(ConstantUtils.PIN_CODE, pinCode)
+        editor.apply()
+    }
+
+    fun getPinCode(): String = preference.getString(ConstantUtils.PIN_CODE, "")
 }
