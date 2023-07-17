@@ -7,4 +7,5 @@ interface Repository {
     fun getUserById(id: Int, onSuccess: (User) -> Unit, onError: (e: String) -> Unit)
     fun getUserFriends(friendsId: List<String>, onSuccess: (List<User>) -> Unit, onError: (e: String) -> Unit)
     fun updateUsers(onSuccess: (List<User>) -> Unit, onError: (e: String) -> Unit)
+    fun saveAndCheckPinCode(code: String, onSuccess: (success: Boolean) -> Unit, onError: (e: String) -> Unit)
 }
