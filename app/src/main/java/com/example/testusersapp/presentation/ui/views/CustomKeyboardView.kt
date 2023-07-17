@@ -40,7 +40,6 @@ class CustomKeyboardView @JvmOverloads constructor(
 
     init {
         setListeners()
-        //setIsClickable(true)
     }
 
     private fun setListeners() {
